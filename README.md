@@ -20,9 +20,22 @@ https://github.com/zhuanghongji/SweetLorem
 
 ## Constant
 
+```swift
+/// The title of Lorem ipsum.
+public static let title = SweetLoremConstant.title
+
+/// The introduction of Lorem ipsum.
+public static let introduction = SweetLoremConstant.introduction
+
+/// The common form of Lorem ipsum reads.
+public static let common = SweetLoremConstant.common
+```
+
+For examples:
+
 ✨ The title of Lorem ipsum :
 
-```
+```swift
 SweetLorem.title
 ```
 
@@ -30,10 +43,10 @@ SweetLorem.title
 
 <br/>
 
-✨ The description of Lorem ipsum :
+✨ The introduction of Lorem ipsum :
 
-```
-SweetLorem.description
+```swift
+SweetLorem.introduction
 ```
 
 > Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
@@ -42,7 +55,7 @@ SweetLorem.description
 
 ✨ The common form of Lorem ipsum reads:
 
-```
+```swift
 SweetLorem.common
 ```
 
@@ -52,57 +65,93 @@ SweetLorem.common
 
 ## Generator 
 
-### Generate a single paragraph
-
-✨ Generate `1` paragraph in `5` words, with starter:
+### Words
 
 ```swift
-SweetLorem.words(start: true, count: 5)
+/// Generate a single paragraph.
+///
+/// - Parameters:
+///   - count: The count of words in the paragraph.
+///   - start: If it's true, the paragraph will start with 
+///            "Lorem ipsum dolor sit amet".
+/// - Returns: The paragraph.
+public static func words(_ count: Int, start: Bool = true) -> String {
+    SweetLoremGenerator.generateParagraph(count: count, start: start)
+}
 ```
 
-> Lorem ipsum dolor sit amet.
+For examples:
+
+✨ Generate 1 paragraph in 10 words, with starter:
+
+```swift
+SweetLorem.words(10, start: true)
+```
+
+> Lorem ipsum dolor sit amet, nisi elit consectetur enim nulla.
 
 <br/> 
 
-✨ Generate `1` paragraph in `20` words, with starter:
+✨ Generate 1 paragraph in 10 words, without starter:
 
 ```swift
-SweetLorem.words(start: true, count: 20)
+SweetLorem.words(10, start: false)
+```
+
+> In exercitation cupidatat ut, mollit magna magna dolor ex qui.
+
+<br/> 
+
+✨ Generate 1 paragraph in 20 words, with starter:
+
+```swift
+SweetLorem.words(20, start: true)
 ```
 
 > Lorem ipsum dolor sit amet, in ad ut ex nulla eu quis eiusmod, eu nulla voluptate laboris non quis excepteur.
 
 <br/> 
 
-✨ Generate `1` paragraph in `5` words, without starter:
+✨ Generate 1 paragraph in 30 words, without starter:
 
 ```swift
-SweetLorem.words(start: false, count: 5)
-```
-
-> Eu irure cupidatat officia veniam.
-
-<br/> 
-
-✨ Generate `1` paragraph in `30` words, without starter:
-
-```swift
-SweetLorem.words(start: false, count: 30)
+SweetLorem.words(30, start: false)
 ```
 
 > In tempor, in duis ut adipiscing elit, nostrud ullamco culpa ut commodo est duis, aute ea in fugiat aute dolore laboris incididunt, aute voluptate laboris quis ut pariatur exercitation excepteur.
 
 <br/>
 
-### Generate multiple paragraphs
-
-✨ Generate `2` paragraphs that each in `10...30` words:
+### Paragraphs
 
 ```swift
-SweetLorem.paragraphs(start: true, 
-                      count: 2, 
-                      minWordsCount: 10, 
-                      minWordsCount: 30)
+/// Generate multiple paragraphs.
+///
+/// - Parameters:
+///   - count: The count of paragraphs.
+///   - min: The minimum count of words in each paragraph.
+///   - max: The maximum count of words in each paragraph.
+///   - start: If it's true, the paragraph will start with 
+///            "Lorem ipsum dolor sit amet".
+/// - Returns: The paragraphs.
+public static func paragraphs(_ count: Int,
+                              min: Int = 10,
+                              max: Int = 30,
+                              start: Bool = true) -> [String]
+{
+    SweetLoremGenerator.generateParagraphs(count: count,
+                                           minWordsCount: min,
+                                           maxWordsCount: max,
+                                           start: start)
+}
+```
+
+For examples:
+
+✨ Generate 2 paragraphs that each in 10...30 words:
+
+```swift
+SweetLorem.paragraphs(2)
 ```
 
 <blockquote>
@@ -113,13 +162,10 @@ Id nulla nisi, quis ut dolor dolore nulla, adipiscing adipiscing excepteur cupid
 
 <br/>
 
-✨ Generate `3` paragraphs that each in `20...50` words:
+✨ Generate 3 paragraphs that each in 20...50 words:
 
 ```swift
-SweetLorem.paragraphs(start: true, 
-                      count: 3, 
-                      minWordsCount: 20, 
-                      minWordsCount: 50)
+SweetLorem.paragraphs(3, min: 20, max: 50)
 ```
 
 <blockquote>
@@ -134,37 +180,56 @@ Do et consequat, sint in ut excepteur consequat in voluptate occaecat velit, non
 
 ### Lists
 
-✨ Generate `2` list that each in `2...3` paragraphs that each in `30...50` words:
+```swift
+/// Generate multiple list of paragraphs.
+/// - Parameters:
+///   - count: The count of list.
+///   - minParagraphs:The minimum count of paragraph in each list.
+///   - maxParagraphs: The maximum count of paragraph in each list.
+///   - minWords: The minimum count of words in each paragraph.
+///   - maxWords: The maximum count of words in each paragraph.
+///   - start: If it's true, the paragraph will start with 
+///            "Lorem ipsum dolor sit amet".
+/// - Returns: The lists of paragraphs.
+public static func lists(_ count: Int,
+                          minParagraphs: Int = 2,
+                          maxParagraphs: Int = 3,
+                          minWords: Int = 10,
+                          maxWords: Int = 30,
+                          start: Bool = true) -> [[String]]
+{
+    SweetLoremGenerator.generateParagraphsList(count: count,
+                                               minParagraphsCount: minParagraphs,
+                                               maxParagraphsCount: maxParagraphs,
+                                               minWordsCount: minWords,
+                                               maxWordsCount: maxWords,
+                                               start: start)
+}
+```
+
+For examples:
+
+✨ Generate 2 list that each in 2...3 paragraphs that each in 10...30 words:
 
 ```swift
-SweetLorem.lists(start: true,
-                 count: 2,
-                 minWordsCount: 10,
-                 maxWordsCount: 30,
-                 minParagraphsCount: 2,
-                 maxParagraphsCount: 3)
+SweetLorem.lists(2)
 ```
 
-```
-😵 ...
-```
+> 😵 ...
 
 <br/>
 
-✨ Generate `3` list that each in `3...4` paragraphs that each in `40...50` words:
+✨ Generate 3 list that each in 3...4 paragraphs that each in 20...50 words:
 
 ```swift
-SweetLorem.lists(start: true,
-                 count: 3,
-                 minWordsCount: 40,
-                 maxWordsCount: 50,
-                 minParagraphsCount: 3,
-                 maxParagraphsCount: 4)
+SweetLorem.lists(3,
+                 minParagraphs: 3,
+                 maxParagraphs: 4,
+                 minWords: 20,
+                 maxWords: 50)
 ```
 
-```
-🤩 ...
-```
+> 🤩 ...
 
 <br/>
 

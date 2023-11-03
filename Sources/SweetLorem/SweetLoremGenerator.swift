@@ -87,7 +87,7 @@ extension SweetLoremGenerator {
 // MARK: Interfaces
 
 extension SweetLoremGenerator {
-    public static func generateSentence(start: Bool, count totalCount: Int) -> String {
+    public static func generateSentence(count totalCount: Int, start: Bool) -> String {
         let starterWords = components(from: starter, retain: false)
         let remainderWords = components(from: remainder, retain: false)
         
@@ -122,45 +122,47 @@ extension SweetLoremGenerator {
         return join(items: items)
     }
     
-    public static func generateParagraph(start: Bool, count totalCount: Int) -> String {
+    public static func generateParagraph(count totalCount: Int, start: Bool) -> String {
         var isFirst = true
         var sentences: [String] = []
         for count in wordCountList(totalCount: totalCount) {
-            let sentence = generateSentence(start: isFirst ? start : false, count: count)
+            let sentence = generateSentence(count: count,
+                                            start: isFirst ? start : false)
             sentences.append(sentence)
             isFirst = false
         }
         return sentences.joined(separator: " ")
     }
     
-    public static func generateParagraphs(start: Bool,
-                                          count: Int,
+    public static func generateParagraphs(count: Int,
                                           minWordsCount: Int,
-                                          maxWordsCount: Int) -> [String]
+                                          maxWordsCount: Int,
+                                          start: Bool) -> [String]
     {
         var result: [String] = []
         for index in 0 ..< count {
             let wordsCount = Int.random(in: minWordsCount ... maxWordsCount)
-            let paragraph = generateParagraph(start: index == 0 ? start : false, count: wordsCount)
+            let paragraph = generateParagraph(count: wordsCount,
+                                              start: index == 0 ? start : false)
             result.append(paragraph)
         }
         return result
     }
     
-    public static func generateParagraphsList(start: Bool,
-                                              count: Int,
+    public static func generateParagraphsList(count: Int,
+                                              minParagraphsCount: Int,
+                                              maxParagraphsCount: Int,
                                               minWordsCount: Int,
                                               maxWordsCount: Int,
-                                              minParagraphsCount: Int,
-                                              maxParagraphsCount: Int) -> [[String]]
+                                              start: Bool) -> [[String]]
     {
         var result: [[String]] = []
         for index in 0 ..< count {
             let paragraphsCount = Int.random(in: minParagraphsCount ... maxParagraphsCount)
-            let paragraphs = generateParagraphs(start: index == 0 ? start : false,
-                                                count: paragraphsCount,
+            let paragraphs = generateParagraphs(count: paragraphsCount,
                                                 minWordsCount: minWordsCount,
-                                                maxWordsCount: maxWordsCount)
+                                                maxWordsCount: maxWordsCount,
+                                                start: index == 0 ? start : false)
             result.append(paragraphs)
         }
         return result

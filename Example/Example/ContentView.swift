@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var action: GeneratorAction = .words
     
     @State private var start = true
-    @State private var count = 5
+    @State private var count = 10
     @State private var minWordsCount = 10
     @State private var maxWordsCount = 100
     @State private var minParagraphsCount = 3
@@ -29,7 +29,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button {
-                logger(SweetLorem.common)
+                logger(SweetLorem.words(6))
             } label: {
                 VStack {
                     Image(systemName: "globe")
@@ -38,6 +38,27 @@ struct ContentView: View {
                         .foregroundColor(.primary)
                 }
             }
+            
+            HStack {
+                Button {
+                    print(SweetLorem.title)
+                } label: {
+                    Text("Title")
+                }
+                
+                Button {
+                    print(SweetLorem.introduction)
+                } label: {
+                    Text("Introduction")
+                }
+                
+                Button {
+                    print(SweetLorem.common)
+                } label: {
+                    Text("Common")
+                }
+            }
+            .padding(.vertical)
 
             Picker("Action", selection: $action) {
                 Text("Words").tag(GeneratorAction.words)
@@ -78,24 +99,24 @@ struct ContentView: View {
     func takeAction() {
         switch action {
         case .words:
-            logger(SweetLorem.words(start: start, count: count))
+            logger(SweetLorem.words(count, start: start))
         case .paragraphs:
-            let paragraphs = SweetLorem.paragraphs(start: start,
-                                                   count: count,
-                                                   minWordsCount: minWordsCount,
-                                                   maxWordsCount: maxWordsCount)
+            let paragraphs = SweetLorem.paragraphs(count,
+                                                   min: minWordsCount,
+                                                   max: maxWordsCount,
+                                                   start: start)
             paragraphs.forEach { logger($0) }
         case .lists:
-            let lists = SweetLorem.lists(start: start,
-                                   count: count,
-                                   minWordsCount: minWordsCount,
-                                   maxWordsCount: maxWordsCount,
-                                   minParagraphsCount: minParagraphsCount,
-                                   maxParagraphsCount: maxParagraphsCount)
+            let lists = SweetLorem.lists(count,
+                                         minParagraphs: minParagraphsCount,
+                                         maxParagraphs: maxParagraphsCount,
+                                         minWords: minWordsCount,
+                                         maxWords: maxWordsCount,
+                                         start: start)
             var index = 0
             lists.forEach { paragraphs in
                 index += 1
-                logger("----- \(index) -----")
+                logger("----- list \(index) -----")
                 paragraphs.forEach { logger($0) }
             }
         }
