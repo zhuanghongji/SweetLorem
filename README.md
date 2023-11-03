@@ -20,95 +20,83 @@ https://github.com/zhuanghongji/SweetLorem
 
 ## Constant
 
-### Title
+✨ The title of Lorem ipsum :
 
-```swift
+```
 SweetLorem.title
-``` 
-
-```
-Lorem ipsum
 ```
 
-### Description
-
-```swift
-SweetLorem.description
-```
-
-```
-Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-```
-
-### Common
-
-```swift
-SweetLorem.common
-```
-
-```
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-```
+> Lorem ipsum
 
 <br/>
 
-## Generator ✨
+✨ The description of Lorem ipsum :
 
-### Words 
+```
+SweetLorem.description
+```
 
-👉👇💡✨💫🌟⭐️🤩
+> Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
 
-1️⃣ Generate `1` paragraph in `5` words, with starter:
+<br/>
+
+✨ The common form of Lorem ipsum reads:
+
+```
+SweetLorem.common
+```
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+<br/>
+
+## Generator 
+
+### Generate a single paragraph
+
+✨ Generate `1` paragraph in `5` words, with starter:
 
 ```swift
 SweetLorem.words(start: true, count: 5)
 ```
 
-```
-Lorem ipsum dolor sit amet.
-```
+> Lorem ipsum dolor sit amet.
 
 <br/> 
 
-2️⃣ Generate `1` paragraph in `20` words, with starter:
+✨ Generate `1` paragraph in `20` words, with starter:
 
-```swift 
+```swift
 SweetLorem.words(start: true, count: 20)
 ```
 
-```
-Lorem ipsum dolor sit amet, in ad ut ex nulla eu quis eiusmod, eu nulla voluptate laboris non quis excepteur.
-```
+> Lorem ipsum dolor sit amet, in ad ut ex nulla eu quis eiusmod, eu nulla voluptate laboris non quis excepteur.
 
 <br/> 
 
-3️⃣ Generate `1` paragraph in `5` words, without starter:
+✨ Generate `1` paragraph in `5` words, without starter:
 
 ```swift
 SweetLorem.words(start: false, count: 5)
 ```
 
-```
-Eu irure cupidatat officia veniam.
-```
+> Eu irure cupidatat officia veniam.
 
 <br/> 
 
-4️⃣ Generate `1` paragraph in `30` words, without starter:
+✨ Generate `1` paragraph in `30` words, without starter:
 
 ```swift
 SweetLorem.words(start: false, count: 30)
 ```
 
-```
-In tempor, in duis ut adipiscing elit, nostrud ullamco culpa ut commodo est duis, aute ea in fugiat aute dolore laboris incididunt, aute voluptate laboris quis ut pariatur exercitation excepteur.
-```
+> In tempor, in duis ut adipiscing elit, nostrud ullamco culpa ut commodo est duis, aute ea in fugiat aute dolore laboris incididunt, aute voluptate laboris quis ut pariatur exercitation excepteur.
 
 <br/>
 
-### Paragraphs
+### Generate multiple paragraphs
 
-1️⃣ Generate `2` paragraphs that each in `10...30` words:
+✨ Generate `2` paragraphs that each in `10...30` words:
 
 ```swift
 SweetLorem.paragraphs(start: true, 
@@ -117,15 +105,15 @@ SweetLorem.paragraphs(start: true,
                       minWordsCount: 30)
 ```
 
-```
+<blockquote>
 Lorem ipsum dolor sit amet, nostrud in culpa sint excepteur sunt, dolore dolore fugiat commodo dolore.
 
 Id nulla nisi, quis ut dolor dolore nulla, adipiscing adipiscing excepteur cupidatat aliquip in commodo consectetur, aute dolore nulla ut sunt reprehenderit do in non, est nisi.
-```
+</blockquote>
 
 <br/>
 
-2️⃣ Generate `3` paragraphs that each in `20...50` words:
+✨ Generate `3` paragraphs that each in `20...50` words:
 
 ```swift
 SweetLorem.paragraphs(start: true, 
@@ -134,17 +122,19 @@ SweetLorem.paragraphs(start: true,
                       minWordsCount: 50)
 ```
 
-```
+<blockquote>
 Lorem ipsum dolor sit amet, eu nulla commodo sunt veniam ad in sint cupidatat, consequat sunt adipiscing duis laboris sed ut do occaecat ad magna, id anim commodo enim in ex.
 
 In, et minim ut proident, minim pariatur eiusmod ut laborum pariatur, sunt aliquip in reprehenderit culpa consectetur fugiat, laborum eu ex ut magna ad commodo veniam.
 
 Do et consequat, sint in ut excepteur consequat in voluptate occaecat velit, non reprehenderit aliquip aliquip exercitation reprehenderit magna aliquip et cupidatat, nisi sunt sint aliqua elit aute eiusmod laborum.
-```
+</blockquote>
+
+<br/>
 
 ### Lists
 
-1️⃣ Generate `2` list that each in `2...3` paragraphs that each in `30...50` words:
+✨ Generate `2` list that each in `2...3` paragraphs that each in `30...50` words:
 
 ```swift
 SweetLorem.lists(start: true,
@@ -159,7 +149,9 @@ SweetLorem.lists(start: true,
 😵 ...
 ```
 
-1️⃣ Generate `3` list that each in `3...4` paragraphs that each in `40...50` words:
+<br/>
+
+✨ Generate `3` list that each in `3...4` paragraphs that each in `40...50` words:
 
 ```swift
 SweetLorem.lists(start: true,
@@ -174,7 +166,10 @@ SweetLorem.lists(start: true,
 🤩 ...
 ```
 
+<br/>
 
 ## License
 
 SweetLorem is available under the MIT license. See the LICENSE file for more info.
+
+<br/>
