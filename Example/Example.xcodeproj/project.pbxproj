@@ -15,6 +15,8 @@
 		290D760D2AF3552400A94ADB /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290D760C2AF3552400A94ADB /* ExampleUITests.swift */; };
 		290D760F2AF3552400A94ADB /* ExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290D760E2AF3552400A94ADB /* ExampleUITestsLaunchTests.swift */; };
 		290D761D2AF3558900A94ADB /* SweetLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 290D761C2AF3558900A94ADB /* SweetLorem */; };
+		290D761F2AF35DA100A94ADB /* SweetLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 290D761E2AF35DA100A94ADB /* SweetLorem */; };
+		29AC66EB2AF4D74800EB5E88 /* DescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC66EA2AF4D74800EB5E88 /* DescriptorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,7 @@
 		290D76082AF3552400A94ADB /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		290D760C2AF3552400A94ADB /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		290D760E2AF3552400A94ADB /* ExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		29AC66EA2AF4D74800EB5E88 /* DescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				290D761D2AF3558900A94ADB /* SweetLorem in Frameworks */,
+				290D761F2AF35DA100A94ADB /* SweetLorem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +103,7 @@
 			children = (
 				290D75F02AF3552200A94ADB /* ExampleApp.swift */,
 				290D75F22AF3552200A94ADB /* ContentView.swift */,
+				29AC66EA2AF4D74800EB5E88 /* DescriptorView.swift */,
 				290D75F42AF3552400A94ADB /* Assets.xcassets */,
 				290D75F62AF3552400A94ADB /* Example.entitlements */,
 				290D75F72AF3552400A94ADB /* Preview Content */,
@@ -149,6 +154,7 @@
 			name = Example;
 			packageProductDependencies = (
 				290D761C2AF3558900A94ADB /* SweetLorem */,
+				290D761E2AF35DA100A94ADB /* SweetLorem */,
 			);
 			productName = Example;
 			productReference = 290D75ED2AF3552200A94ADB /* Example.app */;
@@ -267,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AC66EB2AF4D74800EB5E88 /* DescriptorView.swift in Sources */,
 				290D75F32AF3552200A94ADB /* ContentView.swift in Sources */,
 				290D75F12AF3552200A94ADB /* ExampleApp.swift in Sources */,
 			);
@@ -627,6 +634,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		290D761C2AF3558900A94ADB /* SweetLorem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SweetLorem;
+		};
+		290D761E2AF35DA100A94ADB /* SweetLorem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SweetLorem;
 		};
