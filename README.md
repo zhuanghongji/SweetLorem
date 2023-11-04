@@ -2,6 +2,14 @@
 
 A beautiful and sweet [Lorem Ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum?useskin=vector) generator for Swift and SwiftUI.
 
+<br/>
+
+## What is it ?
+
+The sole purpose of SweetLorem is to enhance the efficiency of text preview in `#Preview`.
+
+![Demo](https://github.com/zhuanghongji/SweetLorem/assets/11421799/4d57546e-3bbd-42ad-82ed-93a3e6553603)
+
 Inspired by [lipsum.com](https://lipsum.com/).
 
 <br/>
