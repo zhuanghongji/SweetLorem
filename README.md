@@ -243,6 +243,49 @@ SweetLorem.lists(3,
 
 <br/>
 
+## Descriptor
+
+Now that you known how to generate dummy text within "Lorem Ipsum" in [Generator](#generator). There may be sometimes when you need to preview real-language text which is not in the 26-letter alphabet. Such as:
+
+- What does the preview look like in Chinese?
+- What does the preview look like in Japanese?
+- What does the preview look like in Arabic, which requires right-to-left layout direction?
+
+Don't worry, SweetLorem provides this feature in box for you. For example: 
+
+```swift
+// Get a SweetLoremDescriptor instance by current language and preview its title
+Text(SweetLorem.default.title)
+
+// Get the instance by specified language directly and preview its title
+Text(SweetLorem.english.title)
+Text(SweetLorem.chinese.title)
+Text(SweetLorem.japanese.title)
+Text(SweetLorem.arabic.title)
+```
+
+The structure of `SweetLoremDescriptor`: 
+
+```swift
+struct SweetLoremDescriptor {
+    let title: String
+    let description: String
+
+    let head1: String
+    let content1: String
+    let head2: String
+    let content2: String
+    let head3: String
+    let content3: String
+    let head4: String
+    let content4: String
+}
+```
+
+More details is in [DESCRIPTOR.md](./DESCRIPTOR.md).
+
+<br/>
+
 ## License
 
 SweetLorem is available under the MIT license. See the LICENSE file for more info.
