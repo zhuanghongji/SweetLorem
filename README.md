@@ -10,7 +10,9 @@ The sole purpose of SweetLorem is to enhance the efficiency of text preview in `
 
 ![Demo](https://github.com/zhuanghongji/SweetLorem/assets/11421799/4d57546e-3bbd-42ad-82ed-93a3e6553603)
 
-Inspired by [lipsum.com](https://lipsum.com/).
+You can review examples for detail in [GENERATOR.md](./GENERATOR.md) and [DESCRIPTOR.md](./DESCRIPTOR.md) before running them in Xcode.
+
+> Inspired by [lipsum.com](https://lipsum.com/).
 
 <br/>
 
