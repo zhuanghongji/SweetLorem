@@ -4,25 +4,31 @@ The screenshots below show the use case of the **descriptor** in the `Example` p
 
 <div>
 <img src="https://github.com/zhuanghongji/SweetLorem/assets/11421799/752d81c6-8bea-4f56-be29-6bdfd2d518fc" width="160" />
-<img src="https://github.com/zhuanghongji/SweetLorem/assets/11421799/2820a98c-c4d3-43ba-a91e-e9420e83906f" width="160" />
+<img src="https://github.com/zhuanghongji/SweetLorem/assets/11421799/e984c9f2-8bce-495d-b925-71c56ab4bdde" width="160" />
+<img src="https://github.com/zhuanghongji/SweetLorem/assets/11421799/bed2ab2a-2ef3-4806-a503-a024a4684d87" width="160" />
+<img src="https://github.com/zhuanghongji/SweetLorem/assets/11421799/a77315a2-5c93-478c-8e11-4beb8502de8d" width="160" />
 </div>
 <br/>
 
-Note: From left to right: English, Simplified Chinese.
+Note: From left to right: English, Chinese, Japanese and Arabic.
 
 The total code of `DescriptorView.swift` :
 
 ```swift
 struct DescriptorView: View {
-
+    @Binding var isRTL: Bool
     @State private var language: String = "Default"
 
     var descriptor: SweetLoremDescriptor {
         switch language {
-        case "en":
-            return .en
-        case "zh-hans":
-            return .zhHans
+        case "English":
+            return .english
+        case "Chinese":
+            return .chinese
+        case "Japanese":
+            return .japanese
+        case "Arabic":
+            return .arabic
         default:
             return .default
         }
@@ -62,8 +68,13 @@ struct DescriptorView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Picker("Language", selection: $language) {
                     Text("Default").tag("Default")
-                    Text("en").tag("en")
-                    Text("zh-hans").tag("zh-hans")
+                    Text("English").tag("English")
+                    Text("Chinese").tag("Chinese")
+                    Text("Japanese").tag("Japanese")
+                    Text("Arabic").tag("Arabic")
+                }
+                .onChange(of: language) { _, newValue in
+                    isRTL = newValue == "Arabic"
                 }
             }
         }
@@ -72,7 +83,7 @@ struct DescriptorView: View {
 
 #Preview {
     NavigationStack {
-        DescriptorView()
+        DescriptorView(isRTL: .constant(false))
     }
 }
 ```

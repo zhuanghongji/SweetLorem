@@ -163,11 +163,19 @@ extension SweetLorem {
         enabled ? .default : .none
     }
 
-    public static var en: SweetLoremDescriptor {
-        enabled ? .en : .none
+    public static var english: SweetLoremDescriptor {
+        enabled ? .english : .none
     }
 
-    public static var zhHans: SweetLoremDescriptor {
-        enabled ? .zhHans : .none
+    public static var chinese: SweetLoremDescriptor {
+        enabled ? .chinese : .none
+    }
+    
+    public static var japanese: SweetLoremDescriptor {
+        enabled ? .japanese : .none
+    }
+    
+    public static var arabic: SweetLoremDescriptor {
+        enabled ? .arabic : .none
     }
 }

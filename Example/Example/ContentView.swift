@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var maxParagraphsCount = 6
     
     @State private var routes: [NavigationRoute] = []
+    @State private var isRTL = false
     
     var wordsCountDisabled: Bool {
         action == .words
@@ -32,7 +33,7 @@ struct ContentView: View {
         NavigationStack(path: $routes) {
             VStack {
                 Button {
-                    logger(SweetLorem.words(Int.random(in: 10...30)))
+                    logger(SweetLorem.words(Int.random(in: 10 ... 30)))
                 } label: {
                     VStack {
                         Image(systemName: "globe")
@@ -103,10 +104,11 @@ struct ContentView: View {
                 case let .preview(text):
                     PreviewView(text: text)
                 case .descriptor:
-                    DescriptorView()
+                    DescriptorView(isRTL: $isRTL)
                 }
             }
         }
+        .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
     }
      
     // MARK: Funcs

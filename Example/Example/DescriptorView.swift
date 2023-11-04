@@ -9,15 +9,19 @@ import SweetLorem
 import SwiftUI
 
 struct DescriptorView: View {
-
+    @Binding var isRTL: Bool
     @State private var language: String = "Default"
 
     var descriptor: SweetLoremDescriptor {
         switch language {
-        case "en":
-            return .en
-        case "zh-hans":
-            return .zhHans
+        case "English":
+            return .english
+        case "Chinese":
+            return .chinese
+        case "Japanese":
+            return .japanese
+        case "Arabic":
+            return .arabic
         default:
             return .default
         }
@@ -57,8 +61,13 @@ struct DescriptorView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Picker("Language", selection: $language) {
                     Text("Default").tag("Default")
-                    Text("en").tag("en")
-                    Text("zh-hans").tag("zh-hans")
+                    Text("English").tag("English")
+                    Text("Chinese").tag("Chinese")
+                    Text("Japanese").tag("Japanese")
+                    Text("Arabic").tag("Arabic")
+                }
+                .onChange(of: language) { _, newValue in
+                    isRTL = newValue == "Arabic"
                 }
             }
         }
@@ -67,6 +76,6 @@ struct DescriptorView: View {
 
 #Preview {
     NavigationStack {
-        DescriptorView()
+        DescriptorView(isRTL: .constant(false))
     }
 }
