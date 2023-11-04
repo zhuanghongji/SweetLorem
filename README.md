@@ -10,6 +10,43 @@ The sole purpose of SweetLorem is to enhance the efficiency of text preview in `
 
 ![Demo](https://github.com/zhuanghongji/SweetLorem/assets/11421799/4d57546e-3bbd-42ad-82ed-93a3e6553603)
 
+The most important principle is that `SweetLorem` always return an **empty string** or an **empty array** unless it's in `DEBUG`:
+
+```swift
+/// The main interfaces of SweetLorem.
+public enum SweetLorem {
+    #if DEBUG
+        /// It's only availble in debug.
+        private static let enabled = true
+    #else
+        /// It's exactly disabled in production.
+        private static let enabled = false
+    #endif
+}
+
+extension SweetLorem {
+    public static func words(_ count: Int, start: Bool = true) -> String {
+        guard enabled else {
+            return ""
+        }
+        // return SweetLoremGenerator.generateParagraph...
+    }
+
+    public static func paragraphs(_ count: Int,
+                                  min: Int = 10,
+                                  max: Int = 30,
+                                  start: Bool = true) -> [String]
+    {
+        guard enabled else {
+            return []
+        }
+        // return SweetLoremGenerator.generateParagraphs...
+    }
+
+    // ...
+}
+```
+
 You can review examples for detail in [GENERATOR.md](./GENERATOR.md) and [DESCRIPTOR.md](./DESCRIPTOR.md) before running them in Xcode.
 
 > Inspired by [lipsum.com](https://lipsum.com/).
@@ -32,13 +69,13 @@ https://github.com/zhuanghongji/SweetLorem
 
 ```swift
 /// The title of Lorem ipsum.
-public static let title = SweetLoremConstant.title
+static var title: String
 
 /// The introduction of Lorem ipsum.
-public static let introduction = SweetLoremConstant.introduction
+static var introduction: String
 
 /// The common form of Lorem ipsum reads.
-public static let common = SweetLoremConstant.common
+static var common: String
 ```
 
 For examples:
@@ -85,9 +122,7 @@ SweetLorem.common
 ///   - start: If it's true, the paragraph will start with 
 ///            "Lorem ipsum dolor sit amet".
 /// - Returns: The paragraph.
-public static func words(_ count: Int, start: Bool = true) -> String {
-    SweetLoremGenerator.generateParagraph(count: count, start: start)
-}
+static func words(_ count: Int, start: Bool = true) -> String
 ```
 
 For examples:
@@ -144,16 +179,10 @@ SweetLorem.words(30, start: false)
 ///   - start: If it's true, the paragraph will start with 
 ///            "Lorem ipsum dolor sit amet".
 /// - Returns: The paragraphs.
-public static func paragraphs(_ count: Int,
-                              min: Int = 10,
-                              max: Int = 30,
-                              start: Bool = true) -> [String]
-{
-    SweetLoremGenerator.generateParagraphs(count: count,
-                                           minWordsCount: min,
-                                           maxWordsCount: max,
-                                           start: start)
-}
+static func paragraphs(_ count: Int,
+                       min: Int = 10,
+                       max: Int = 30,
+                       start: Bool = true) -> [String]
 ```
 
 For examples:
@@ -201,20 +230,12 @@ Do et consequat, sint in ut excepteur consequat in voluptate occaecat velit, non
 ///   - start: If it's true, the paragraph will start with 
 ///            "Lorem ipsum dolor sit amet".
 /// - Returns: The lists of paragraphs.
-public static func lists(_ count: Int,
-                          minParagraphs: Int = 2,
-                          maxParagraphs: Int = 3,
-                          minWords: Int = 10,
-                          maxWords: Int = 30,
-                          start: Bool = true) -> [[String]]
-{
-    SweetLoremGenerator.generateParagraphsList(count: count,
-                                               minParagraphsCount: minParagraphs,
-                                               maxParagraphsCount: maxParagraphs,
-                                               minWordsCount: minWords,
-                                               maxWordsCount: maxWords,
-                                               start: start)
-}
+static func lists(_ count: Int,
+                  minParagraphs: Int = 2,
+                  maxParagraphs: Int = 3,
+                  minWords: Int = 10,
+                  maxWords: Int = 30,
+                  start: Bool = true) -> [[String]]
 ```
 
 For examples:
@@ -225,7 +246,7 @@ For examples:
 SweetLorem.lists(2)
 ```
 
-> 😵 ...
+> 😵 Too long to paste here ...
 
 <br/>
 
@@ -239,7 +260,7 @@ SweetLorem.lists(3,
                  maxWords: 50)
 ```
 
-> 🤩 ...
+> 🤩 Too long to paste here too ...
 
 <br/>
 
@@ -285,6 +306,122 @@ struct SweetLoremDescriptor {
 More details is in [DESCRIPTOR.md](./DESCRIPTOR.md).
 
 <br/>
+
+## Wrapper 
+
+It is good practice to wrap a third-party library instead of using it directly in case it becomes difficult to drop it in the future. Additionally, after wrapping the library, you do not need to import it before using. Here is an example of a wrapper:
+
+```swift
+import SweetLorem
+
+enum Lorem {}
+
+// MARK: Constant
+
+extension Lorem {
+    static var title: String {
+        SweetLorem.title
+    }
+
+    static var introduction: String {
+        SweetLorem.introduction
+    }
+
+    static var common: String {
+        SweetLorem.common
+    }
+}
+
+// MARK: Generator
+
+extension Lorem {
+    static func words(_ count: Int, start: Bool = true) -> String {
+        SweetLorem.words(count, start: start)
+    }
+    
+    static func paragraphs(_ count: Int,
+                           min: Int = 10,
+                           max: Int = 30,
+                           start: Bool = true) -> [String]
+    {
+        SweetLorem.paragraphs(count, 
+                              min: min, 
+                              max: max, 
+                              start: start)
+    }
+    
+    static func paragraphsJoined(_ count: Int,
+                                 min: Int = 10,
+                                 max: Int = 30,
+                                 start: Bool = true,
+                                 separator: String = "\n\n") -> String
+    {
+        SweetLorem.paragraphsJoined(count, 
+                                    min: min, 
+                                    max: max, 
+                                    start: start, 
+                                    separator: separator)
+    }
+    
+    static func lists(_ count: Int,
+                      minParagraphs: Int = 2,
+                      maxParagraphs: Int = 3,
+                      minWords: Int = 10,
+                      maxWords: Int = 30,
+                      start: Bool = true) -> [[String]]
+    {
+        SweetLorem.lists(count,
+                         minParagraphs: minParagraphs,
+                         maxParagraphs: maxParagraphs,
+                         minWords: minWords,
+                         maxWords: maxWords,
+                         start: start)
+    }
+    
+    static func listsJoined(_ count: Int,
+                            minParagraphs: Int = 2,
+                            maxParagraphs: Int = 3,
+                            minWords: Int = 10,
+                            maxWords: Int = 30,
+                            start: Bool = true,
+                            wordsSeparator: String = "\n\n",
+                            paragraphsSeparator: String = "\n\n") -> String
+    {
+        SweetLorem.listsJoined(count,
+                               minParagraphs: minParagraphs,
+                               maxParagraphs: maxParagraphs,
+                               minWords: minWords,
+                               maxWords: maxWords,
+                               start: start,
+                               wordsSeparator: wordsSeparator,
+                               paragraphsSeparator: paragraphsSeparator)
+    }
+}
+
+// MARK: Descriptor
+
+extension Lorem {
+    static var `default`: SweetLoremDescriptor {
+        SweetLorem.default
+    }
+    
+    static var english: SweetLoremDescriptor {
+        SweetLorem.english
+    }
+    
+    static var chinese: SweetLoremDescriptor {
+        SweetLorem.chinese
+    }
+    
+    static var japanese: SweetLoremDescriptor {
+        SweetLorem.japanese
+    }
+    
+    static var arabic: SweetLoremDescriptor {
+        SweetLorem.arabic
+    }
+}
+```
 
 ## License
 
