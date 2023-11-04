@@ -17,6 +17,7 @@
 		290D761D2AF3558900A94ADB /* SweetLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 290D761C2AF3558900A94ADB /* SweetLorem */; };
 		290D761F2AF35DA100A94ADB /* SweetLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 290D761E2AF35DA100A94ADB /* SweetLorem */; };
 		29AC66EB2AF4D74800EB5E88 /* DescriptorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC66EA2AF4D74800EB5E88 /* DescriptorView.swift */; };
+		29AC66ED2AF5DFD500EB5E88 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC66EC2AF5DFD500EB5E88 /* PreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		290D760C2AF3552400A94ADB /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		290D760E2AF3552400A94ADB /* ExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		29AC66EA2AF4D74800EB5E88 /* DescriptorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptorView.swift; sourceTree = "<group>"; };
+		29AC66EC2AF5DFD500EB5E88 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				290D75F02AF3552200A94ADB /* ExampleApp.swift */,
 				290D75F22AF3552200A94ADB /* ContentView.swift */,
+				29AC66EC2AF5DFD500EB5E88 /* PreviewView.swift */,
 				29AC66EA2AF4D74800EB5E88 /* DescriptorView.swift */,
 				290D75F42AF3552400A94ADB /* Assets.xcassets */,
 				290D75F62AF3552400A94ADB /* Example.entitlements */,
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29AC66EB2AF4D74800EB5E88 /* DescriptorView.swift in Sources */,
+				29AC66ED2AF5DFD500EB5E88 /* PreviewView.swift in Sources */,
 				290D75F32AF3552200A94ADB /* ContentView.swift in Sources */,
 				290D75F12AF3552200A94ADB /* ExampleApp.swift in Sources */,
 			);

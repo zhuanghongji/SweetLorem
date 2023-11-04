@@ -48,6 +48,27 @@ extension SweetLorem {
                                                start: start)
     }
 
+    /// Generate multiple paragraphs and joined to a string.
+    ///
+    /// - Parameters:
+    ///   - count: The count of paragraphs.
+    ///   - min: The minimum count of words in each paragraph.
+    ///   - max: The maximum count of words in each paragraph.
+    ///   - start: If it's true, the paragraph will start with "Lorem ipsum dolor sit amet".
+    ///   - separator: The separotor of words joined for inserting.
+    /// - Returns: The joined string of paragraphs.
+    public static func paragraphsJoined(_ count: Int,
+                                        min: Int = 10,
+                                        max: Int = 30,
+                                        start: Bool = true,
+                                        separator: String = "\n\n") -> String
+    {
+        paragraphs(count,
+                   min: min,
+                   max: max,
+                   start: start).joined(separator: separator)
+    }
+
     /// Generate multiple list of paragraphs.
     ///
     /// - Parameters:
@@ -71,6 +92,38 @@ extension SweetLorem {
                                                    minWordsCount: minWords,
                                                    maxWordsCount: maxWords,
                                                    start: start)
+    }
+
+    /// Generate multiple list of paragraphs and joined to a string.
+    ///
+    /// - Parameters:
+    ///   - count: The count of list.
+    ///   - minParagraphs:The minimum count of paragraph in each list.
+    ///   - maxParagraphs: The maximum count of paragraph in each list.
+    ///   - minWords: The minimum count of words in each paragraph.
+    ///   - maxWords: The maximum count of words in each paragraph.
+    ///   - start: If it's true, the paragraph will start with "Lorem ipsum dolor sit amet".
+    ///   - wordsSeparator: The separotor of words joined for inserting.
+    ///   - paragraphsSeparator: The separotor of paragraphs joined for inserting.
+    /// - Returns: The joined string of lists.
+    public static func listsJoined(_ count: Int,
+                                   minParagraphs: Int = 2,
+                                   maxParagraphs: Int = 3,
+                                   minWords: Int = 10,
+                                   maxWords: Int = 30,
+                                   start: Bool = true,
+                                   wordsSeparator: String = "\n\n",
+                                   paragraphsSeparator: String = "\n\n") -> String
+    {
+        lists(count,
+              minParagraphs: minParagraphs,
+              maxParagraphs: maxParagraphs,
+              minWords: minWords,
+              maxWords: maxWords,
+              start: start).map {
+            $0.joined(separator: wordsSeparator)
+        }
+        .joined(separator: paragraphsSeparator)
     }
 }
 

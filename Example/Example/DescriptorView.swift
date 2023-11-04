@@ -9,38 +9,64 @@ import SweetLorem
 import SwiftUI
 
 struct DescriptorView: View {
+
+    @State private var language: String = "Default"
+
+    var descriptor: SweetLoremDescriptor {
+        switch language {
+        case "en":
+            return .en
+        case "zh-hans":
+            return .zhHans
+        default:
+            return .default
+        }
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text(SweetLorem.default.title)
+                Text(descriptor.title)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .center)
-                Text(SweetLorem.default.description)
+                Text(descriptor.description)
                     .foregroundStyle(Color(red: 0.5, green: 0.5, blue: 0.5))
-                
+
                 // 1
-                Text(SweetLorem.default.head1)
+                Text(descriptor.head1)
                     .fontWeight(.bold)
-                Text(SweetLorem.default.content1)
+                Text(descriptor.content1)
                 // 2
-                Text(SweetLorem.default.head2)
+                Text(descriptor.head2)
                     .fontWeight(.bold)
-                Text(SweetLorem.default.content2)
+                Text(descriptor.content2)
                 // 3
-                Text(SweetLorem.default.head3)
+                Text(descriptor.head3)
                     .fontWeight(.bold)
-                Text(SweetLorem.default.content3)
+                Text(descriptor.content3)
                 // 4
-                Text(SweetLorem.default.head4)
+                Text(descriptor.head4)
                     .fontWeight(.bold)
-                Text(SweetLoremDescriptor.default.content4)
+                Text(descriptor.content4)
             }
-            .padding(.vertical, 32)
+            .lineSpacing(4)
             .padding(.horizontal)
+            .padding(.vertical, 32)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Picker("Language", selection: $language) {
+                    Text("Default").tag("Default")
+                    Text("en").tag("en")
+                    Text("zh-hans").tag("zh-hans")
+                }
+            }
         }
     }
 }
 
 #Preview {
-    DescriptorView()
+    NavigationStack {
+        DescriptorView()
+    }
 }

@@ -18,6 +18,8 @@ struct ContentView: View {
     @State private var minParagraphsCount = 3
     @State private var maxParagraphsCount = 6
     
+    @State private var routes: [NavigationRoute] = []
+    
     var wordsCountDisabled: Bool {
         action == .words
     }
@@ -27,85 +29,105 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
-            Button {
-                logger(SweetLorem.words(6))
-            } label: {
-                VStack {
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                    Text("Hello, SweetLorem")
-                        .foregroundColor(.primary)
-                }
-            }
-            
-            HStack {
-                Button {
-                    print(SweetLorem.title)
-                } label: {
-                    Text("Title")
-                }
-                
-                Button {
-                    print(SweetLorem.introduction)
-                } label: {
-                    Text("Introduction")
-                }
-                
-                Button {
-                    print(SweetLorem.common)
-                } label: {
-                    Text("Common")
-                }
-            }
-            .padding(.vertical)
-
-            Picker("Action", selection: $action) {
-                Text("Words").tag(GeneratorAction.words)
-                Text("Paragraphs").tag(GeneratorAction.paragraphs)
-                Text("Lists").tag(GeneratorAction.lists)
-            }
-            .pickerStyle(.segmented)
-            .padding(.vertical)
-            
+        NavigationStack(path: $routes) {
             VStack {
-                Toggle("Start", isOn: $start)
-                Divider().padding(.vertical)
-                NumberPicker("Count", value: $count)
-                NumberPicker("MinWordsCount", value: $minWordsCount)
-                    .disabled(wordsCountDisabled)
-                NumberPicker("MaxWordsCount", value: $maxWordsCount)
-                    .disabled(wordsCountDisabled)
-                NumberPicker("MinParagraphsCount", value: $minParagraphsCount)
-                    .disabled(paragraphsCountDisabled)
-                NumberPicker("MaxParagraphsCount", value: $maxParagraphsCount)
-                    .disabled(paragraphsCountDisabled)
+                Button {
+                    logger(SweetLorem.words(Int.random(in: 10...30)))
+                } label: {
+                    VStack {
+                        Image(systemName: "globe")
+                            .imageScale(.large)
+                        Text("Hello, SweetLorem")
+                            .foregroundColor(.primary)
+                    }
+                }
+                
+                HStack {
+                    Button {
+                        print(SweetLorem.title)
+                    } label: {
+                        Text("Title")
+                    }
+                    
+                    Button {
+                        print(SweetLorem.introduction)
+                    } label: {
+                        Text("Introduction")
+                    }
+                    
+                    Button {
+                        print(SweetLorem.common)
+                    } label: {
+                        Text("Common")
+                    }
+                }
+                .padding(.vertical)
+                
+                Picker("Action", selection: $action) {
+                    Text("Words").tag(GeneratorAction.words)
+                    Text("Paragraphs").tag(GeneratorAction.paragraphs)
+                    Text("Lists").tag(GeneratorAction.lists)
+                }
+                .pickerStyle(.segmented)
+                .padding(.top)
+                
+                VStack {
+                    NumberPicker("Count", value: $count)
+                    NumberPicker("MinWordsCount", value: $minWordsCount)
+                        .disabled(wordsCountDisabled)
+                    NumberPicker("MaxWordsCount", value: $maxWordsCount)
+                        .disabled(wordsCountDisabled)
+                    NumberPicker("MinParagraphsCount", value: $minParagraphsCount)
+                        .disabled(paragraphsCountDisabled)
+                    NumberPicker("MaxParagraphsCount", value: $maxParagraphsCount)
+                        .disabled(paragraphsCountDisabled)
+                    Divider().padding(.vertical)
+                    Toggle("Start", isOn: $start)
+                }
+                .padding()
+                Divider()
+                
+                Button(action: previewText) {
+                    Text("Generate and Preview")
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.top)
+                Button(action: descriptor) {
+                    Text("Descriptor")
+                }
+                .padding(.top)
             }
             .padding()
-            Divider()
-            Button(action: takeAction) {
-                Text("Generate")
+            .navigationDestination(for: NavigationRoute.self) { route in
+                switch route {
+                case let .preview(text):
+                    PreviewView(text: text)
+                case .descriptor:
+                    DescriptorView()
+                }
             }
-            .buttonStyle(.borderedProminent)
-            .padding(.top)
         }
-        .padding()
     }
+     
+    // MARK: Funcs
     
     func logger(_ message: String) {
         print(message, terminator: "\n\n")
     }
     
-    func takeAction() {
+    func generateText() -> String {
         switch action {
         case .words:
-            logger(SweetLorem.words(count, start: start))
+            let text = SweetLorem.words(count, start: start)
+            logger(text)
+            return text
         case .paragraphs:
             let paragraphs = SweetLorem.paragraphs(count,
                                                    min: minWordsCount,
                                                    max: maxWordsCount,
                                                    start: start)
-            paragraphs.forEach { logger($0) }
+            let text = paragraphs.joined(separator: "\n\n")
+            return text
         case .lists:
             let lists = SweetLorem.lists(count,
                                          minParagraphs: minParagraphsCount,
@@ -119,7 +141,18 @@ struct ContentView: View {
                 logger("----- list \(index) -----")
                 paragraphs.forEach { logger($0) }
             }
+            let text = lists.map { $0.joined(separator: "\n\n") }.joined(separator: "\n\n")
+            return text
         }
+    }
+    
+    func previewText() {
+        let text = generateText()
+        routes.append(.preview(text))
+    }
+    
+    func descriptor() {
+        routes.append(.descriptor)
     }
 }
 
@@ -129,6 +162,11 @@ enum GeneratorAction: Identifiable {
     case lists
     
     var id: Self { self }
+}
+
+enum NavigationRoute: Hashable {
+    case preview(String)
+    case descriptor
 }
 
 struct NumberPicker: View {
