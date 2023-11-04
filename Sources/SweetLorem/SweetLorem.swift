@@ -5,6 +5,7 @@
 //  Created by zhuanghongji on 2023/11/3.
 //
 
+/// The main interfaces of SweetLorem.
 public enum SweetLorem {
     #if DEBUG
         /// It's only availble in debug.
@@ -13,7 +14,11 @@ public enum SweetLorem {
         /// It's exactly disabled in production.
         private static let enabled = false
     #endif
+}
 
+// MARK: Constant
+
+extension SweetLorem {
     /// The title of Lorem ipsum.
     public static var title: String {
         enabled ? SweetLoremConstant.title : ""
@@ -170,11 +175,11 @@ extension SweetLorem {
     public static var chinese: SweetLoremDescriptor {
         enabled ? .chinese : .none
     }
-    
+
     public static var japanese: SweetLoremDescriptor {
         enabled ? .japanese : .none
     }
-    
+
     public static var arabic: SweetLoremDescriptor {
         enabled ? .arabic : .none
     }
