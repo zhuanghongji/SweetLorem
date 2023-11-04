@@ -8,8 +8,8 @@
 import Foundation
 
 public struct SweetLoremDescriptor {
-    /// Always "Lorem Ipsum".
-    public let title: String = "Lorem Ipsum"
+    /// Either "Lorem Ipsum" or empty string.
+    public let title: String
 
     /// Localized string of "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain".
     public let description: String
@@ -33,6 +33,29 @@ public struct SweetLoremDescriptor {
     public let head4: String
     /// Localized string of the content belongs to `head4`.
     public let content4: String
+
+    init(title: String = "Lorem Ipsum",
+         description: String,
+         head1: String, 
+         content1: String,
+         head2: String,
+         content2: String,
+         head3: String,
+         content3: String,
+         head4: String,
+         content4: String)
+    {
+        self.title = title
+        self.description = description
+        self.head1 = head1
+        self.content1 = content1
+        self.head2 = head2
+        self.content2 = content2
+        self.head3 = head3
+        self.content3 = content3
+        self.head4 = head4
+        self.content4 = content4
+    }
 
     // MARK: Computes
 
@@ -66,9 +89,24 @@ public struct SweetLoremDescriptor {
     }
 }
 
-// MARK: Internal
+// MARK: Statics
 
 public extension SweetLoremDescriptor {
+    /// Every properties is empty string.
+    static let none = SweetLoremDescriptor(
+        title: "",
+        description: "",
+        head1: "",
+        content1: "",
+        head2: "",
+        content2: "",
+        head3: "",
+        content3: "",
+        head4: "",
+        content4: ""
+    )
+
+    /// English Descriptor
     static let en = SweetLoremDescriptor(
         description: "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.",
         head1: "What is Lorem Ipsum?",
@@ -81,6 +119,7 @@ public extension SweetLoremDescriptor {
         content4: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
     )
 
+    /// Simplified Chinese Descriptor
     static let zhHans = SweetLoremDescriptor(
         description: "无人爱苦，亦无人寻之欲之，乃因其苦。",
         head1: "什么是 Lorem Ipsum ？",
@@ -94,7 +133,7 @@ public extension SweetLoremDescriptor {
     )
 }
 
-// MARK: Public
+// MARK: Default
 
 public extension SweetLoremDescriptor {
     /// Get a `SweetLoremDescriptor` instance by current language.

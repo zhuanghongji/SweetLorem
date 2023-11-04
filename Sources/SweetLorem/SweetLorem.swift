@@ -6,14 +6,28 @@
 //
 
 public enum SweetLorem {
+    #if DEBUG
+        /// It's only availble in debug.
+        private static let enabled = true
+    #else
+        /// It's exactly disabled in production.
+        private static let enabled = false
+    #endif
+
     /// The title of Lorem ipsum.
-    public static let title = SweetLoremConstant.title
+    public static var title: String {
+        enabled ? SweetLoremConstant.title : ""
+    }
 
     /// The introduction of Lorem ipsum.
-    public static let introduction = SweetLoremConstant.introduction
+    public static var introduction: String {
+        enabled ? SweetLoremConstant.introduction : ""
+    }
 
     /// The common form of Lorem ipsum reads.
-    public static let common = SweetLoremConstant.common
+    public static var common: String {
+        enabled ? SweetLoremConstant.common : ""
+    }
 }
 
 // MARK: Generator
@@ -26,7 +40,10 @@ extension SweetLorem {
     ///   - start: If it's true, the paragraph will start with "Lorem ipsum dolor sit amet".
     /// - Returns: The paragraph.
     public static func words(_ count: Int, start: Bool = true) -> String {
-        SweetLoremGenerator.generateParagraph(count: count, start: start)
+        guard enabled else {
+            return ""
+        }
+        return SweetLoremGenerator.generateParagraph(count: count, start: start)
     }
 
     /// Generate multiple paragraphs.
@@ -42,10 +59,13 @@ extension SweetLorem {
                                   max: Int = 30,
                                   start: Bool = true) -> [String]
     {
-        SweetLoremGenerator.generateParagraphs(count: count,
-                                               minWordsCount: min,
-                                               maxWordsCount: max,
-                                               start: start)
+        guard enabled else {
+            return []
+        }
+        return SweetLoremGenerator.generateParagraphs(count: count,
+                                                      minWordsCount: min,
+                                                      maxWordsCount: max,
+                                                      start: start)
     }
 
     /// Generate multiple paragraphs and joined to a string.
@@ -63,10 +83,13 @@ extension SweetLorem {
                                         start: Bool = true,
                                         separator: String = "\n\n") -> String
     {
-        paragraphs(count,
-                   min: min,
-                   max: max,
-                   start: start).joined(separator: separator)
+        guard enabled else {
+            return ""
+        }
+        return paragraphs(count,
+                          min: min,
+                          max: max,
+                          start: start).joined(separator: separator)
     }
 
     /// Generate multiple list of paragraphs.
@@ -86,12 +109,15 @@ extension SweetLorem {
                              maxWords: Int = 30,
                              start: Bool = true) -> [[String]]
     {
-        SweetLoremGenerator.generateParagraphsList(count: count,
-                                                   minParagraphsCount: minParagraphs,
-                                                   maxParagraphsCount: maxParagraphs,
-                                                   minWordsCount: minWords,
-                                                   maxWordsCount: maxWords,
-                                                   start: start)
+        guard enabled else {
+            return []
+        }
+        return SweetLoremGenerator.generateParagraphsList(count: count,
+                                                          minParagraphsCount: minParagraphs,
+                                                          maxParagraphsCount: maxParagraphs,
+                                                          minWordsCount: minWords,
+                                                          maxWordsCount: maxWords,
+                                                          start: start)
     }
 
     /// Generate multiple list of paragraphs and joined to a string.
@@ -115,12 +141,15 @@ extension SweetLorem {
                                    wordsSeparator: String = "\n\n",
                                    paragraphsSeparator: String = "\n\n") -> String
     {
-        lists(count,
-              minParagraphs: minParagraphs,
-              maxParagraphs: maxParagraphs,
-              minWords: minWords,
-              maxWords: maxWords,
-              start: start).map {
+        guard enabled else {
+            return ""
+        }
+        return lists(count,
+                     minParagraphs: minParagraphs,
+                     maxParagraphs: maxParagraphs,
+                     minWords: minWords,
+                     maxWords: maxWords,
+                     start: start).map {
             $0.joined(separator: wordsSeparator)
         }
         .joined(separator: paragraphsSeparator)
@@ -131,14 +160,14 @@ extension SweetLorem {
 
 extension SweetLorem {
     public static var `default`: SweetLoremDescriptor {
-        SweetLoremDescriptor.default
+        enabled ? .default : .none
     }
 
     public static var en: SweetLoremDescriptor {
-        SweetLoremDescriptor.en
+        enabled ? .en : .none
     }
 
     public static var zhHans: SweetLoremDescriptor {
-        SweetLoremDescriptor.zhHans
+        enabled ? .zhHans : .none
     }
 }
